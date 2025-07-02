@@ -1,32 +1,14 @@
-name: React CI/CD
+name: Deploy Static HTML to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # or 'master' if that’s your default branch
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout source code
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build React app
-        run: npm run build
-
-      Upload production build as artifact
-      - name: Upload production build
-        uses: actions/upload-artifact@v4
-        with:
-          name: react-build
-          path: build/
